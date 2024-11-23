@@ -1,0 +1,46 @@
+services:
+  telegraf:
+    image: telegraf:latest
+    network_mode: host
+    privileged: true
+    environment:
+      - TZ=${TZ}
+      - HOST_PROC=/rootfs/proc
+      - HOST_SYS=/rootfs/sys
+      - HOST_ETC=/rootfs/etc
+      - HOST_MOUNT_PREFIX=/rootfs
+    labels:
+      - com.centurylinklabs.watchtower.enable=true
+    volumes:
+      - /var/run/utmp:/var/run/utmp:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /:/rootfs:ro
+      - /sys:/rootfs/sys:ro
+      - /etc:/rootfs/etc:ro
+      - /proc:/rootfs/proc:ro
+      - /run/udev:/run/udev:ro
+      - ${MOUNT_ROOT}/telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:rw
+      - ${MOUNT_ROOT}/telegraf/mibs:/usr/share/snmp/mibs/:rw
+      
+  telegraf2:
+    image: telegraf:latest
+    network_mode: host
+    privileged: true
+    environment:
+      - TZ=${TZ}
+      - HOST_PROC=/rootfs/proc
+      - HOST_SYS=/rootfs/sys
+      - HOST_ETC=/rootfs/etc
+      - HOST_MOUNT_PREFIX=/rootfs
+    labels:
+      - com.centurylinklabs.watchtower.enable=true
+    volumes:
+      - /var/run/utmp:/var/run/utmp:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /:/rootfs:ro
+      - /sys:/rootfs/sys:ro
+      - /etc:/rootfs/etc:ro
+      - /proc:/rootfs/proc:ro
+      - /run/udev:/run/udev:ro
+      - ${MOUNT_ROOT}/telegraf/telegraf2.conf:/etc/telegraf/telegraf.conf:rw
+      - ${MOUNT_ROOT}/telegraf/mibs:/usr/share/snmp/mibs/:rw
