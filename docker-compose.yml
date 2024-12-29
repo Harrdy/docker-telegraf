@@ -3,6 +3,7 @@ services:
     image: telegraf:latest
     network_mode: host
     privileged: true
+    restart: unless-stopped
     environment:
       - TZ=${TZ}
       - HOST_PROC=/rootfs/proc
@@ -26,6 +27,7 @@ services:
     image: telegraf:latest
     network_mode: host
     privileged: true
+    restart: unless-stopped
     environment:
       - TZ=${TZ}
       - HOST_PROC=/rootfs/proc
